@@ -1,0 +1,12 @@
+-Pour utiliser les sources il faut créer le makefile avec cmake
+-Les compiler,
+-Les exécutables `cert` et `check` seront créés dans un répertoire "bin/"
+-Le dossier "sample/" contient le fichier "email1.txt"
+-Un fichier "tmp.tmp.tmp" est généré pour rajouter une ligne aux headers de l'email
+-Les deux exécutables ont besoin d'un argument ( le chemin vers l'email en question)
+-Dans les fichier check.c et cert.c \
+vous pouvez remplacer la fonction : "HMAC::get_RFC_2104_hash(string secret)" par : "HMAC::get_soft_hash(string secret)"\
+get_soft_hash <=> question A2/A3
+get_RFC_2104_hash <=> question A4
+
+Si vous rencontrez des difficultés à lancer les sources n'hésitez pas à me contacter à l'adresse : gautier.maurice@etu.univ-amu.fr
