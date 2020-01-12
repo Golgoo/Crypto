@@ -1,2 +1,0 @@
-$ cat email1.txt | tail -n 4 | md5sum
-70aaccbc45dd51664b7c6f014277e9c8  -
