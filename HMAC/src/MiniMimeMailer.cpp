@@ -102,5 +102,5 @@ string Mailer::getHeaderValue(string field_name)
     }
   }while((!this->fxx.eof()) && (strlen(tmp) != 0));
 
-  return str;
+  return "";
 }

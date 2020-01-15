@@ -11,7 +11,7 @@
 int main(int argc, char* argv[])
 {
   if(argc < 2){
-    printf("Usage..");
+    printf("Usage : %s <chemin-vers-email>", argv[0]);
     exit(EXIT_FAILURE);
   }
   string x_auth_field_name = "X-AUTH";
@@ -23,16 +23,20 @@ int main(int argc, char* argv[])
   Mailer mailer(email_path);
   string found_auth = mailer.getHeaderValue(x_auth_field_name) ;
 
-
-  HMAC hmac (mailer.readCorpse());
-  string computed_auth = hmac.get_RFC_2104_hash(secret);
-
-  if(computed_auth == found_auth){
-    std::cout << "Valid auth" << std::endl;
+  if(found_auth.size() == 0){
+    std::cout << "No X-AUTH field found" << std::endl;
   }else{
-    std::cout << computed_auth << std::endl;
-    std::cout << found_auth << std::endl;
+    HMAC hmac (mailer.readCorpse());
+    string computed_auth = hmac.get_RFC_2104_hash(secret);
+
+    if(computed_auth == found_auth){
+      std::cout << "Valid auth" << std::endl;
+    }else{
+      std::cout << computed_auth << std::endl;
+      std::cout << found_auth << std::endl;
+    }
   }
+
 
   exit(EXIT_SUCCESS);
 }

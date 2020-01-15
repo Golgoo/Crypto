@@ -13,10 +13,14 @@
 #include <iomanip>
 using namespace std;
 
+/**
+ * Les commentaires sont écrit dans les headers
+ * Une documentation Doxygen est générée dans le répertoire /doc.
+ */
 
-HMAC::HMAC(std::string str)
+HMAC::HMAC(std::string content)
 {
-  this->content = str;
+  this->content = content;
 }
 
 
@@ -37,7 +41,7 @@ std::string HMAC::hash_string(std::string str)
     //std::cout << hashed << endl;
   }
   free(tmp);
-  
+
   return hashed ;
 }
 

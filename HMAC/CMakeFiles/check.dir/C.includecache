@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+./include/HMAC.h
+stdio.h
+-
+
+/home/goozi/Bureau/C++-Workspace/cryto/HMAC/src/HMAC.c
+HMAC.h
+/home/goozi/Bureau/C++-Workspace/cryto/HMAC/src/HMAC.h
+stdlib.h
+-
+openssl/md5.h
+-
+string.h
+-
+
+/home/goozi/Bureau/C++-Workspace/cryto/HMAC/src/check.c
+stdio.h
+-
+stdlib.h
+-
+openssl/md5.h
+-
+string.h
+-
+HMAC.h
+/home/goozi/Bureau/C++-Workspace/cryto/HMAC/src/HMAC.h
+
