@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+./include/diversification.hpp
+cstdlib
+-
+
+./include/util.hpp
+cstdlib
+-
+
+/amuhome/m16001863/Documents/Crypto/AES/Cxx/mains/main.cpp
+util.hpp
+/amuhome/m16001863/Documents/Crypto/AES/Cxx/mains/util.hpp
+
+/amuhome/m16001863/Documents/Crypto/AES/Cxx/src/aes.cpp
+
+/amuhome/m16001863/Documents/Crypto/AES/Cxx/src/diversification.cpp
+diversification.hpp
+/amuhome/m16001863/Documents/Crypto/AES/Cxx/src/diversification.hpp
+
+/amuhome/m16001863/Documents/Crypto/AES/Cxx/src/util.cpp
+util.hpp
+/amuhome/m16001863/Documents/Crypto/AES/Cxx/src/util.hpp
+iostream
+-
+

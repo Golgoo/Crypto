@@ -121,7 +121,7 @@ void calcule_la_clef_etendue() { // À modifier !
     printf("Clée tmp init : ");
     affiche_la_clef(tmp , 4);
     if( (index)%Nk == 0 ) {
-      printf("\nCase i \% Nk == 0\n");
+      printf("\nCase i % Nk == 0\n");
       RotWord(tmp);
       printf("After RotWord : ");
       affiche_la_clef(tmp , 4);
