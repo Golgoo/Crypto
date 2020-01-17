@@ -1,12 +1,14 @@
 #include "util.hpp"
 
 #include <iostream>
+#include <iomanip>
 
 void crypt_util::print_key(uchar *clef, int longueur){
-  for (int i=0; i<longueur; i++) { std::cout << std::hex << (int)clef[i] ; }
+  for (int i=0; i<longueur; i++) { std::cout << std::setfill('0') << std::setw(2) << std::uppercase <<std::hex << (int)clef[i] ;}
   std::cout << std::endl;
 }
 
+//https://stackoverflow.com/questions/33982870/how-to-convert-char-array-to-hexadecimal
 uchar crypt_util::CharToHex( char c )
 {
     switch( c ) {

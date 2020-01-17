@@ -4,6 +4,9 @@
 typedef unsigned char uchar;
 
 #include <cstdlib>
+#include <vector>
+
+using namespace std;
 
 namespace crypt_util{
   inline uchar SBox[256] = {
