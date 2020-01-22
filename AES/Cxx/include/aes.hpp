@@ -17,7 +17,7 @@ namespace AES{
       void addRoundKey(); // XOR(current_state, roundKey, 16);
   };
   class Decoder{
-    
+
   };
 }
 

@@ -31,6 +31,12 @@ namespace crypt_util{
   inline uchar Rcon[10] = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36 } ;
   // Constantes de ronde
 
+  inline uchar CBox[16] = {
+    0x02, 0x03, 0x01, 0x01,
+    0x01, 0x02, 0x03, 0x01,
+    0x01, 0x01, 0x02, 0x03,
+    0x03, 0x01, 0x01, 0x02};
+
   inline uchar K[32] = {                          // Une clef courte a une longueur maximale de 32 octets
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -43,9 +49,14 @@ namespace crypt_util{
 
   void XOR(uchar * dst , uchar * src, size_t len);
 
-  void RotWord(uchar *tab);
-  void SubWord(uchar* tab);
+  void RotWord(uchar *tab, size_t len, int shift = 1);
+  void SubWord(uchar* tab, size_t len);
 
+  void ShiftRows(uchar *tab);
+
+  uchar gmul(uchar a, uchar b);
+
+  void MixColumns(uchar *tab);
 };
 
 #endif

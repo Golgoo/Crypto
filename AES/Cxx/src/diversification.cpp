@@ -56,43 +56,45 @@ void KeyExtender::computeShortKey(char * clef_en_hexa)
   }
 }
 
+#define COL_SIZE 4 
+
 void KeyExtender::computeExtendedKey()
 {
-  uchar tmp[4] ;
+  uchar tmp[COL_SIZE] ;
   for(int i = 0 ; i < this->key_len ; i ++){
     this->extended_key[i] = this->key[i];
   }
-  for(int i = this->key_len ; i < this->extended_key_len ; i+= 4)
+  for(int i = this->key_len ; i < this->extended_key_len ; i+= COL_SIZE)
   {
     //printf("\n------------\n");
-    int index = i / 4 ;
+    int index = i / COL_SIZE ;
     //printf("index : %d - i : %d\n", index, i);
-    for(int j = 0 ; j < 4 ; j ++){
-      tmp[j] = this->extended_key[(i-4) + j];
+    for(int j = 0 ; j < COL_SIZE ; j ++){
+      tmp[j] = this->extended_key[(i-COL_SIZE) + j];
     }
     //printf("Clée tmp init : ");
     //crypt_util::print_key(tmp , 4);
     if( (index)%Nk == 0 ) {
       //std::cout << "Case i % Nk == 0" << endl;
-      crypt_util::RotWord(tmp);
+      crypt_util::RotWord(tmp, COL_SIZE);
       //printf("After RotWord : ");
       //crypt_util::print_key(tmp , 4);
-      crypt_util::SubWord(tmp);
+      crypt_util::SubWord(tmp, COL_SIZE);
       //printf("After SubWord : ");
       //crypt_util::print_key(tmp , 4);
       tmp[0] ^= crypt_util::Rcon[(index)/Nk - 1];
       //XorRCon(tmp, (index)/Nk - 1);
       //printf("After XorRCon : ");
       //crypt_util::print_key(tmp, 4);
-    }else if(Nk > 6 && (index)%Nk == 4){
-      crypt_util::SubWord(tmp);
+    }else if(Nk > 6 && (index)%Nk == COL_SIZE){
+      crypt_util::SubWord(tmp, COL_SIZE);
     }
 
-    crypt_util::XOR(tmp, this->extended_key + ( index - Nk) * 4, 4);
+    crypt_util::XOR(tmp, this->extended_key + ( index - Nk) * COL_SIZE, COL_SIZE);
     //XorW(tmp, (index - Nk) * 4);
     //printf("After XorW : ");
     //crypt_util::print_key(tmp , 4);
-    for(int j = 0 ; j < 4 ; j ++){
+    for(int j = 0 ; j < COL_SIZE ; j ++){
       this->extended_key[i + j] = tmp[j];
     }
   }
