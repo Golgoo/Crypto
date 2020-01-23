@@ -5,7 +5,6 @@ typedef unsigned char uchar;
 
 #include <cstdlib>
 #include <vector>
-#include <array>
 
 using namespace std;
 
@@ -54,6 +53,8 @@ namespace crypt_util{
   void SubWord(uchar* tab, size_t len);
 
   void ShiftRows(uchar *tab);
+
+  void reverse(uchar *tab, size_t row , size_t col );
 
   uchar gmul(uchar a, uchar b);
 

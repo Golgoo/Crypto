@@ -3,11 +3,7 @@
 
 typedef unsigned char uchar ;
 
-#include <cstdlib>
 #include <array>
-#include <iostream>
-#include <array>
-#include <iomanip>
 
 namespace AES{
   class KeyExtender{
@@ -30,7 +26,7 @@ namespace AES{
       int Nk, Nr ;
       void init();
       void computeExtendedKey();
-      void computeShortKey(char *);//Problème avec clef nulle
+      void computeShortKey(char *);
   };
 };
 

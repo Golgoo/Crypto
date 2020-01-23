@@ -4,6 +4,7 @@
 
 #include "util.hpp"
 
+#include <cstdlib>
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
@@ -25,6 +26,8 @@ class testCryptUtil : public CppUnit::TestCase
       CPPUNIT_TEST( ShiftRowsTest2 );
       CPPUNIT_TEST( ShiftRowsTestTP );
       CPPUNIT_TEST( MixColumnsTest );
+      CPPUNIT_TEST( ReverseTest );
+      CPPUNIT_TEST( ReverseTest2 );
     CPPUNIT_TEST_SUITE_END();
 
   public :
@@ -137,6 +140,45 @@ class testCryptUtil : public CppUnit::TestCase
       crypt_util::MixColumns(a);
       char message [] = "Indice 00\0";
       for(int i = 0 ; i < 16 ; i ++){
+        sprintf(message, "Indice %d", i);
+        CPPUNIT_ASSERT_EQUAL_MESSAGE(message, (int)expected[i], (int)a[i]);
+      }
+    }
+    void ReverseTest(){
+      uchar a[] = {
+        0x62, 0x63, 0x63, 0x63,
+        0x62, 0x63, 0x63, 0x63,
+        0x62, 0x63, 0x63, 0x63,
+        0x62, 0x63, 0x63, 0x63
+      };
+      uchar expected[] = {
+        0x62, 0x62, 0x62, 0x62,
+        0x63, 0x63, 0x63, 0x63,
+        0x63, 0x63, 0x63, 0x63,
+        0x63, 0x63, 0x63, 0x63
+      };
+      crypt_util::reverse(a, 4, 4);
+      char message[] = "Indice 00\0";
+      for(int i = 0 ; i < 16 ; i ++){
+        sprintf(message, "Indice %d", i);
+        CPPUNIT_ASSERT_EQUAL_MESSAGE(message, (int)expected[i], (int)a[i]);
+      }
+    }
+    void ReverseTest2(){
+      uchar a[] = {
+        0x62, 0x63, 0x63,
+        0x62, 0x63, 0x63,
+        0x62, 0x63, 0x63,
+        0x62, 0x63, 0x63
+      };
+      uchar expected[] = {
+        0x62, 0x62, 0x62, 0x62,
+        0x63, 0x63, 0x63, 0x63,
+        0x63, 0x63, 0x63, 0x63
+      };
+      crypt_util::reverse(a, 4, 3);
+      char message[] = "Indice 00\0";
+      for(int i = 0 ; i < 12 ; i ++){
         sprintf(message, "Indice %d", i);
         CPPUNIT_ASSERT_EQUAL_MESSAGE(message, (int)expected[i], (int)a[i]);
       }

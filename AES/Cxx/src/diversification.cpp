@@ -4,14 +4,15 @@ using namespace AES ;
 using namespace std ;
 
 #include <iostream>
+#include <iomanip>
 #include <cstring>
 #include "util.hpp"
 
 KeyExtender::KeyExtender(char * key, size_t len): key_len(len)
 {
+  this->key = (uchar*)malloc(sizeof(uchar) * len);
   computeShortKey(key);
 
-  crypt_util::print_key(this->key, this->key_len);
   init();
 }
 
@@ -117,10 +118,11 @@ uchar * KeyExtender::getShortKey()
 
 void KeyExtender::printRounds()
 {
+  std::array<unsigned char, 16> key ;
   for(int i = 0 ; i < this->Nr + 1; i ++)
   {
     std::cout << "Round (" << i << ") : " ;
-    std::array<unsigned char, 16> key = this->getRound(i);
+    key = this->getRound(i);
     for (auto it = key.begin() ; it < key.end() ; it ++){
       std::cout << std::setfill('0') << std::setw(2) << std::uppercase << std::hex << (int)(*it);
     }

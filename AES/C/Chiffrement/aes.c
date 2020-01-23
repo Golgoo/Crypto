@@ -104,8 +104,8 @@ uchar SBox[256] = {
 
 
 /* Fonction mystérieuse qui calcule le produit de deux octets */
-
-uchar gmul(uchar a, uchar b) {
+/** DEFINIE DANS util.hpp *************************************/
+/*uchar gmul(uchar a, uchar b) {
   uchar p = 0;
   uchar hi_bit_set;
   for(int i = 0; i < 8; i++) {
@@ -116,15 +116,12 @@ uchar gmul(uchar a, uchar b) {
     b >>= 1;
   }
   return p & 0xFF;
-}
+}*/
+/***************************************************************/
 
 /* Partie à compléter pour ce TP */
 
-void SubBytes(void){
-  for(int i = 0 ; i < 4 ; i ++){
-    tab[i] = SBox[tab[i]];
-  }
-};
+void SubBytes(void){};
 void ShiftRows(void){};
 void MixColumns(void){};
 void AddRoundKey(int r){};

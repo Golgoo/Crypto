@@ -1,6 +1,3 @@
-
-
-
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -12,7 +9,7 @@
 #include "diversification.hpp"
 #include "aes.hpp"
 
-int main(int argc, char* argv[]){
+int main(int argc, char * argv[]){
   if(argc !=2){
     printf("Usage: %s <clef en hexadécimal>", argv[0]);
     exit(EXIT_FAILURE);
@@ -26,18 +23,9 @@ int main(int argc, char* argv[]){
   }
 
   using namespace AES ;
+
   KeyExtender keyExtender(argv[1], longueur_de_la_clef);
-  crypt_util::print_key(keyExtender.getExtendedKey(), keyExtender.getExtendedKeyLen());
-  for(int i = 0 ; i < keyExtender.getNbRound(); i ++)
-  {
-    std::cout << "Round (" << i << ") : " ;
-    std::vector<unsigned char> key = keyExtender.getRound(i);
-    for (auto it = key.begin() ; it < key.end() ; it ++){
-      std::cout << std::setfill('0') << std::setw(2) << std::uppercase << std::hex << (int)(*it);
-    }
-    std::cout << std::endl ;
-  }
+  keyExtender.printRounds();
 
-  //Encoder encoder(keyExtender);
-
+  return EXIT_SUCCESS;
 }

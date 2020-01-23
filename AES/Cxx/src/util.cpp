@@ -97,3 +97,16 @@ void crypt_util::MixColumns(uchar *tab)
     }
   }
 }
+
+void crypt_util::reverse(uchar *tab, size_t row , size_t col )
+{
+  std::vector<uchar> tmp(row * col);
+  int index = 0 ;
+  for(int i = 0 ; i < row * col ; i ++) tmp[i] = tab[i] ;
+  for(int i = 0 ; i < row ; i ++){
+    for(int j = 0 ; j < col ; j ++){
+      index = i * col + j;
+      tab[j * row + i ] = tmp[index];
+    }
+  }
+}
