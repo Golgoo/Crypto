@@ -4,7 +4,10 @@
 typedef unsigned char uchar ;
 
 #include <cstdlib>
-#include <vector>
+#include <array>
+#include <iostream>
+#include <array>
+#include <iomanip>
 
 namespace AES{
   class KeyExtender{
@@ -15,8 +18,9 @@ namespace AES{
       size_t getExtendedKeyLen();
       uchar * getShortKey();
       size_t getShortKeyLen();
-      std::vector<unsigned char> getRound(int i);
+      std::array<uchar, 16> getRound(int i);
       size_t getNbRound();
+      void printRounds();
     private :
       uchar * key ;
       size_t key_len ;
@@ -26,7 +30,7 @@ namespace AES{
       int Nk, Nr ;
       void init();
       void computeExtendedKey();
-      void computeShortKey(char *);
+      void computeShortKey(char *);//Problème avec clef nulle
   };
 };
 

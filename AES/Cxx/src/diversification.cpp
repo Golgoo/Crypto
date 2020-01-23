@@ -10,7 +10,7 @@ using namespace std ;
 KeyExtender::KeyExtender(char * key, size_t len): key_len(len)
 {
   computeShortKey(key);
-  std::cout << "Key len :: " << this->key_len ;
+
   crypt_util::print_key(this->key, this->key_len);
   init();
 }
@@ -56,7 +56,7 @@ void KeyExtender::computeShortKey(char * clef_en_hexa)
   }
 }
 
-#define COL_SIZE 4 
+#define COL_SIZE 4
 
 void KeyExtender::computeExtendedKey()
 {
@@ -115,19 +115,32 @@ uchar * KeyExtender::getShortKey()
   return this->key ;
 }
 
+void KeyExtender::printRounds()
+{
+  for(int i = 0 ; i < this->Nr + 1; i ++)
+  {
+    std::cout << "Round (" << i << ") : " ;
+    std::array<unsigned char, 16> key = this->getRound(i);
+    for (auto it = key.begin() ; it < key.end() ; it ++){
+      std::cout << std::setfill('0') << std::setw(2) << std::uppercase << std::hex << (int)(*it);
+    }
+    std::cout << std::endl ;
+  }
+}
+
 size_t KeyExtender::getShortKeyLen()
 {
   return this->key_len ;
 }
 
-std::vector<unsigned char> KeyExtender::getRound(int i)
+array<uchar, 16> KeyExtender::getRound(int i)
 {
-  std::vector<unsigned char> v;
+  array<uchar, 16> key_round;
   uchar * ptr = this->extended_key + i * 16 ;
   for(int k = 0 ; k < 16 ; k ++){
-    v.push_back(ptr[k]);
+    key_round[k] = ptr[k];
   }
-  return v;
+  return key_round;
 }
 
 size_t KeyExtender::getNbRound()

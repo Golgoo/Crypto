@@ -8,13 +8,17 @@
 namespace AES{
   class Encoder{
     public :
-      Encoder(KeyExtender keyExtender);
-      uchar * encode(uchar *content);
+      Encoder();
+      ~Encoder();
+      uchar * encode(uchar *content, char *key);
+      uchar * encode(uchar * content, uchar * key, size_t len);
+      //Vecteur en argument <=> vecteur<uchar, allocator<uchar>> ?.?..???
     private :
-      uchar current_state[16];
+      uchar *current_state;
       size_t key_len ;
-      KeyExtender keyExtender ;
+      KeyExtender * keyExtender ;
       void addRoundKey(); // XOR(current_state, roundKey, 16);
+      void encode_algo();
   };
   class Decoder{
 

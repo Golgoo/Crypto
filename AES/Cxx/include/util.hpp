@@ -5,6 +5,7 @@ typedef unsigned char uchar;
 
 #include <cstdlib>
 #include <vector>
+#include <array>
 
 using namespace std;
 

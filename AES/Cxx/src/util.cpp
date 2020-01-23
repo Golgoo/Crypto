@@ -42,7 +42,6 @@ void crypt_util::XOR(uchar * dst, uchar * src, size_t len)
     dst[i] ^= src[i];
   }
 }
-
 void crypt_util::RotWord(uchar *tab, size_t len, int shift)
 {
   if(len <= 0 ) return ;
