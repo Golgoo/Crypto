@@ -36,7 +36,6 @@ void Encoder::encode_algo()
 {
   int nbRound = this->keyExtender->getNbRound();
   int currentIndex = 0 ;
-  int roundIndex = 0 ;
   uchar * currentRound = this->keyExtender->getExtendedKey();
   crypt_util::reverse(currentRound, 4, 4);
   //crypt_util::print_key(currentRound, 16);
@@ -45,6 +44,7 @@ void Encoder::encode_algo()
   for( currentIndex = 1 ; currentIndex < this->keyExtender->getNbRound() - 1 ; currentIndex ++)
   {
     crypt_util::SubWord(this->current_state, 16);
+    //ShiftRows
     for(int i = 0 ; i < 4 ; i ++){
       crypt_util::RotWord(this->current_state + i*4, 4, i);
     }
@@ -55,6 +55,7 @@ void Encoder::encode_algo()
     crypt_util::XOR(this->current_state, currentRound, 16);
   }
   crypt_util::SubWord(this->current_state, 16);
+  //ShiftRows
   for(int i = 0 ; i < 4 ; i ++){
     crypt_util::RotWord(this->current_state + i*4, 4, i);
   }

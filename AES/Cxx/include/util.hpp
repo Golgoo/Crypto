@@ -28,6 +28,10 @@ namespace crypt_util{
     0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16};
   // Table de substitution
 
+
+  inline uchar InvSBox [256];
+
+
   inline uchar Rcon[10] = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36 } ;
   // Constantes de ronde
 
@@ -36,6 +40,12 @@ namespace crypt_util{
     0x01, 0x02, 0x03, 0x01,
     0x01, 0x01, 0x02, 0x03,
     0x03, 0x01, 0x01, 0x02};
+
+  inline uchar InvCBox[16] = {
+    0x0E, 0x0B, 0x0D, 0x09,
+    0x09, 0x0E, 0x0B, 0x0D,
+    0x0D, 0x09, 0x0E, 0x0B,
+    0x0B, 0x0D, 0x09, 0x0E};
 
   inline uchar K[32] = {                          // Une clef courte a une longueur maximale de 32 octets
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -50,15 +60,31 @@ namespace crypt_util{
   void XOR(uchar * dst , uchar * src, size_t len);
 
   void RotWord(uchar *tab, size_t len, int shift = 1);
-  void SubWord(uchar* tab, size_t len);
 
-  void ShiftRows(uchar *tab);
+  void SubWord(uchar* tab, size_t len);
+  void inv_SubWord(uchar *tab, size_t len);
 
   void reverse(uchar *tab, size_t row , size_t col );
 
   uchar gmul(uchar a, uchar b);
 
   void MixColumns(uchar *tab);
+
+  void MulMix(uchar *tab, uchar *CBox);
+
+  void inv_MixColumn(uchar *tab);
+
+  inline uchar getInvSBoxAt(uchar index){
+    return InvSBox[index];
+  }
+
+  inline uchar *getInvSBox(){
+    return InvSBox;
+  }
+
+  void computeInvSBox();
+
 };
+
 
 #endif

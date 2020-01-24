@@ -81,7 +81,7 @@ uchar crypt_util::gmul(uchar a, uchar b)
   return p & 0xFF;
 }
 
-void crypt_util::MixColumns(uchar *tab)
+void crypt_util::MulMix(uchar *tab, uchar *Box)
 {
   int il ; uchar tmp [4] ;
   for(int col = 0 ; col < 4 ; col ++){
@@ -89,13 +89,20 @@ void crypt_util::MixColumns(uchar *tab)
     for(int j = 0 ; j < 4 ; j ++){
       tmp[j] = 0 ;
       for(int l = col ; l <=col + 12 ; l += 4){
-        tmp[j] ^= crypt_util::gmul(tab[l], crypt_util::CBox[il++]);
+        tmp[j] ^= crypt_util::gmul(tab[l], Box[il++]);
       }
     }
     for(int j = 0 ; j < 4 ; j ++){
       tab[j * 4 + col] = tmp[j] ;
     }
   }
+}
+void crypt_util::MixColumns(uchar *tab){
+  MulMix(tab, CBox);
+}
+
+void crypt_util::inv_MixColumn(uchar *tab){
+  MulMix(tab, InvCBox);
 }
 
 void crypt_util::reverse(uchar *tab, size_t row , size_t col )
@@ -108,5 +115,17 @@ void crypt_util::reverse(uchar *tab, size_t row , size_t col )
       index = i * col + j;
       tab[j * row + i ] = tmp[index];
     }
+  }
+}
+
+void crypt_util::inv_SubWord(uchar *tab, size_t len){
+  for(int i = 0 ; i < len ; i ++){
+    tab[i] = InvSBox[tab[i]];
+  }
+}
+
+void crypt_util::computeInvSBox(){
+  for(int i = 0 ; i < 256 ; i ++){
+    InvSBox[SBox[i]] = i ;
   }
 }
