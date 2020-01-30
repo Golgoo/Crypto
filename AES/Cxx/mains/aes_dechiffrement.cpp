@@ -28,9 +28,8 @@ int main(void){
 
   using namespace AES ;
 
-  Decoder d;
-  d.decode(State, K, 16);
-
+  Decoder d(K, longueur_de_la_clef);
+  d.decode(State);
   std::cout << "Decrypted :" << std::endl ;
   crypt_util::print_key(State, 16);
 

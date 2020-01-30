@@ -2,42 +2,39 @@
 #define __AES_HPP__
 
 #include "diversification.hpp"
+#include <cstdlib>
+
 
 /**
- * TODO : Construction + initialisation abstraite +
- *        Utiliser le key extender à la construction / le libérer à la destruction
- *            => Même utilisation pour chaque tour de boucle
- *            + Reverse extendedKey() pour chaque bloc (inverser à chaque encodage / decodage change la clef).
- *        Identifier les fonction commune entre Encoder / Decoder
+ *    TODO : Identifier les fonction commune entre Encoder / Decoder
  *            => Les factoriser à l'abstraction
  *        -> Pq pas utiliser ptr sur fonction pour inv_MixColumn, etc.. ( si vraiment besoin pour éviter de dupliquer bêtement )
  */
 
 namespace AES{
-  class Encoder{
-    public :
-      Encoder();
-      ~Encoder();
-      uchar * encode(uchar *content, char *key);
-      uchar * encode(uchar * content, uchar * key, size_t len);
-    private :
-      uchar *current_state;
-      size_t key_len ;
-      KeyExtender * keyExtender ;
-      void encode_algo();
-  };
-  class Decoder{
+  class AES{
   public:
-    uchar * decode(uchar * content, char *key);
-    uchar * decode(uchar * content, uchar *key, size_t len);
-    Decoder();
-    ~Decoder();
-  private:
-    uchar *current_state;
-    size_t key_len ;
+    AES(uchar *key, size_t key_len);
+    AES(char * key);
+    void transposeRounds();
+    ~AES();
+  protected:
     KeyExtender * keyExtender ;
-    void decode_algo();
   };
-}
+  class Encoder : public AES{
+  public :
+    Encoder(uchar * key, size_t key_len);
+    Encoder(char * key);
+    void encode(uchar * current_state);
+    void encode_file(char * src_filename, char * dst_filename);
+  };
+  class Decoder : public AES{
+  public:
+    Decoder(uchar * key, size_t key_len);
+    Decoder(char * key);
+    void decode(uchar * current_state);
+    void decode_file(char * src_filename, char *dst_filename);
+  };
+};
 
 #endif

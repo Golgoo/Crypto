@@ -129,3 +129,10 @@ void crypt_util::computeInvSBox(){
     InvSBox[SBox[i]] = i ;
   }
 }
+
+void crypt_util::fill(uchar *content, size_t len_to_fill, uchar motif)
+{
+  for(int i = 0 ; i < len_to_fill ; i ++){
+      content[i] = motif;
+  }
+}

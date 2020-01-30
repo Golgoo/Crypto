@@ -78,11 +78,13 @@ namespace crypt_util{
     return InvSBox[index];
   }
 
-  inline uchar *getInvSBox(){
-    return InvSBox;
+  inline uchar getSBoxAt(uchar index){
+    return SBox[index];
   }
 
   void computeInvSBox();
+
+  void fill(uchar *content, size_t len_to_fill, uchar motif);
 
 };
 
