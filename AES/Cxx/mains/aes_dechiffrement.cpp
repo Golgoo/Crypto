@@ -6,13 +6,17 @@
 #include <iomanip>
 
 #include "util.hpp"
-#include "diversification.hpp"
 #include "aes.hpp"
+#include "block.hpp"
 
 typedef unsigned char uchar ;
 
+
 uchar State[16] = {
-  0x66, 0xEF, 0x88, 0xCA, 0xE9, 0x8A, 0x4C, 0x34, 0x4B, 0x2C, 0xFA, 0x2B, 0xD4, 0x3B, 0x59, 0x2E
+  0x66, 0xE9, 0x4B, 0xD4,
+  0xEF, 0x8A, 0x2C, 0x3B,
+  0x88, 0x4C, 0xFA, 0x59,
+  0xCA, 0x34, 0x2B, 0x2E
 };
 
 int longueur_du_bloc = 16 ;
@@ -28,10 +32,14 @@ int main(void){
 
   using namespace AES ;
 
+  Block StateBlock(4, 4, State);
+  std::cout << "Bloc d'entrée :" << std::endl ;
+  StateBlock.printBlock();
   Decoder d(K, longueur_de_la_clef);
-  d.decode(State);
+  d.decode(StateBlock);
   std::cout << "Decrypted :" << std::endl ;
-  crypt_util::print_key(State, 16);
+  StateBlock.printBlock();
+  //crypt_util::print_key(State, 16);
 
   return EXIT_SUCCESS;
 }

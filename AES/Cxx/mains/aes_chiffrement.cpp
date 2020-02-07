@@ -8,7 +8,7 @@
 #include "util.hpp"
 #include "diversification.hpp"
 #include "aes.hpp"
-
+#include <time.h>
 
 uchar State[16] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -18,6 +18,11 @@ int longueur_du_bloc = 16 ;
 
 uchar K[16] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} ;
+
+uchar InitV[16] =
+{
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
 
 int longueur_de_la_clef = 16 ;
 
@@ -39,14 +44,25 @@ int main(int argc, char *argv[]){
   Encoder encoder(argv[1]);
   */
 
+  Block SBlock (4, 4, State);
+  Block InitBloc(4,4, InitV);
+
   Encoder encoder(K, longueur_de_la_clef);
   cout << "Clef : " ;
   crypt_util::print_key(K, longueur_de_la_clef);
-  cout << "Bloc d'entrée  : " ;
+  cout << "Bloc d'entrée  : " << endl ;
   crypt_util::print_key(State, longueur_du_bloc);
-  encoder.encode(State);
-  cout << "Bloc de sortie : " ;
-  crypt_util::print_key(State, longueur_du_bloc);
+  cout << "Vecteur d'initialisation" << std::endl ;
+
+  encoder.encode(SBlock) ;
+  cout << "Bloc de sortie : " << endl ;
+  for(int i = 0 ; i < 4 ; i ++){
+    for(int j = 0 ; j < 4 ; j ++){
+      std::cout << std::setfill('0') << std::setw(2)
+                << std::uppercase << std::hex << (int)SBlock.get(i,j) << ' ' ;
+    }
+    std::cout << std::endl ;
+  }
 
   return EXIT_SUCCESS ;
 }

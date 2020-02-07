@@ -2,6 +2,8 @@
 #define __AES_HPP__
 
 #include "diversification.hpp"
+#include "block.hpp"
+#include "util.hpp"
 #include <cstdlib>
 
 
@@ -16,23 +18,26 @@ namespace AES{
   public:
     AES(uchar *key, size_t key_len);
     AES(char * key);
-    void transposeRounds();
     ~AES();
   protected:
     KeyExtender * keyExtender ;
+    Block _SBlock;
+    Block _CBlock;
+    Block _InvCBlock;
+    Block _InvSBlock;
   };
   class Encoder : public AES{
   public :
     Encoder(uchar * key, size_t key_len);
     Encoder(char * key);
-    void encode(uchar * current_state);
-    void encode_file(char * src_filename, char * dst_filename);
+    void encode(Block& current_state);
+    void encode_file(char * src_filename, char * dst_filename, Block &initBlock, bool concat_init_vector );
   };
   class Decoder : public AES{
   public:
     Decoder(uchar * key, size_t key_len);
     Decoder(char * key);
-    void decode(uchar * current_state);
+    void decode(Block& current_state);
     void decode_file(char * src_filename, char *dst_filename);
   };
 };

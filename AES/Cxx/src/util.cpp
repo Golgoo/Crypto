@@ -54,9 +54,9 @@ void crypt_util::RotWord(uchar *tab, size_t len, int shift)
     tab[i] = tab[i+shift];
   }
   if(shift)
-  for(int i = len - shift, j = 0 ; i < len ; i ++, j++){
-    tab[i] = tmp[j] ;
-  }
+    for(int i = len - shift, j = 0 ; i < len ; i ++, j++){
+      tab[i] = tmp[j] ;
+    }
   free(tmp);
 }
 

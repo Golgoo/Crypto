@@ -15,14 +15,22 @@ add_executable(aes_d ${SOURCES} mains/aes_dechiffrement.cpp)
 target_compile_features(aes_d PUBLIC cxx_std_17)
 
 #Si vous n'avez pas CPPUnit commentez ces deux lignes
-add_executable(tests ${SOURCES} mains/tests.cpp)
-target_compile_features(tests PUBLIC cxx_std_17)
+#add_executable(tests ${SOURCES} mains/tests.cpp)
+#target_compile_features(tests PUBLIC cxx_std_17)
 
 add_executable(key_ext ${SOURCES} mains/key_extension.cpp)
 target_compile_features(key_ext PUBLIC cxx_std_17)
 
 add_executable(aes_butoken ${SOURCES} mains/aes_encode_butoken.cpp)
 target_compile_features(aes_butoken PUBLIC cxx_std_17)
+
+add_executable(block_test ${SOURCES} mains/TestBlock.cpp)
+target_compile_features(block_test PUBLIC cxx_std_17)
+
+target_link_libraries(
+        block_test
+        m
+)
 
 target_link_libraries(
         aes
@@ -45,7 +53,7 @@ target_link_libraries(
 )
 
 #Si vous n'avez pas CPPUnit commentez ce bloc
-target_link_libraries(
-  tests
-  m cppunit
-)
+#target_link_libraries(
+#  tests
+#  m cppunit
+#)
