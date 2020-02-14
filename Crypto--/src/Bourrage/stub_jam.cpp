@@ -18,8 +18,11 @@ void StubJammer::jam(std::vector<uchar> &vector, size_t block_size)
 
 void StubJammer::unjam(std::vector<uchar> &vector)
 {
-  for(auto it = vector.end() - 1 ; it >= vector.begin() ; it--){
-    vector.pop_back();
-    if(*it == 0x01) break;
+  if(vector.back() == 0x00){
+    for(auto it = vector.end() - 1 ; it >= vector.begin() ; it--){
+      vector.pop_back();
+      if(*it == 0x01) break;
+    }
   }
+
 }
