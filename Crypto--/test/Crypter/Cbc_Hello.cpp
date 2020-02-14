@@ -6,30 +6,33 @@
 #include "Bourrage/Jammer.hpp"
 #include "Bourrage/PKCS_5.hpp"
 #include "OperatingModel/cbc_model.hpp"
+#include "OperatingModel/cfb_model.hpp"
 
 int main(int argc, char*argv[])
 {
+  crypter::Encoder *rsa_encoder = new rsa::RSA();
+  crypter::Decoder *rsa_decoder = new rsa::RSA();
 
+  crypter::Coder coder(rsa_encoder, rsa_decoder);
   std::cout << "Programme 1" << std::endl;
   {
-    if(argc < 1) return EXIT_FAILURE;
-    crypter::Encoder *rsa_encoder = new rsa::RSA();
-    Cbc_Model op_m (argv[1]);
+    if(argc < 2) return EXIT_FAILURE;
+    Cfb_Model op_m (argv[1], coder);
     std::vector<uchar> init_r(16);
-    std::fill(init_r.begin(), init_r.end(), 0xDD);
+    std::fill(init_r.begin(), init_r.end(), 0x00);
     op_m.set_init_vector(init_r);
-    op_m.encode_file("tmp.txt", *rsa_encoder);
-    delete rsa_encoder ;
+    op_m.encode_file("tmp.txt");
   }
 
-/*
   std::cout << "Programme 2" << std::endl;
   {
-    crypter::Decoder *rsa_decoder = new rsa::RSA();
-    Ecb_Model op_m_d("tmp.txt");
-    op_m_d.decode_file(argv[2], *rsa_decoder);
-    delete rsa_decoder;
+    if(argc < 3 ) return EXIT_FAILURE;
+    Cfb_Model op_m_d("tmp.txt", coder);
+    op_m_d.decode_file(argv[2]);
   }
-*/
+
+  delete rsa_encoder;
+  delete rsa_decoder;
+
   return EXIT_SUCCESS;
 }

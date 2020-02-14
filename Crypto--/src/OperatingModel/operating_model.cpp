@@ -2,7 +2,7 @@
 #include "OperatingModel/operating_model.hpp"
 
 
-OperatingModel::OperatingModel(const std::string src_path, Jammer *jammer) :_jammer(jammer), _init_vector(16)
+OperatingModel::OperatingModel(const std::string src_path, crypter::Coder coder, Jammer *jammer) :_jammer(jammer), _init_vector(16), _coder(coder)
 {
   _input_stream = new std::ifstream(src_path.c_str());
 }
