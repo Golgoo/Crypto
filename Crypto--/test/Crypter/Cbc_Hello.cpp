@@ -7,6 +7,7 @@
 #include "Bourrage/PKCS_5.hpp"
 #include "OperatingModel/cbc_model.hpp"
 #include "OperatingModel/cfb_model.hpp"
+#include "OperatingModel/ofb_model.hpp"
 
 int main(int argc, char*argv[])
 {
@@ -17,7 +18,7 @@ int main(int argc, char*argv[])
   std::cout << "Programme 1" << std::endl;
   {
     if(argc < 2) return EXIT_FAILURE;
-    Cfb_Model op_m (argv[1], coder);
+    Ofb_Model op_m (argv[1], coder);
     std::vector<uchar> init_r(16);
     std::fill(init_r.begin(), init_r.end(), 0x00);
     op_m.set_init_vector(init_r);
@@ -27,7 +28,7 @@ int main(int argc, char*argv[])
   std::cout << "Programme 2" << std::endl;
   {
     if(argc < 3 ) return EXIT_FAILURE;
-    Cfb_Model op_m_d("tmp.txt", coder);
+    Ofb_Model op_m_d("tmp.txt", coder);
     op_m_d.decode_file(argv[2]);
   }
 
