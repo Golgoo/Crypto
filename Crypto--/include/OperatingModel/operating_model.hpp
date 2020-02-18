@@ -12,7 +12,6 @@ typedef unsigned char uchar;
 #include "Crypter/coder.hpp"
 #include "Bourrage/Jammer.hpp"
 
-#include "Util/operation.hpp"
 
 class OperatingModel{
 public:

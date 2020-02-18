@@ -2,6 +2,8 @@
 
 #include "Bourrage/stub_jam.hpp"
 
+#include "Util/util.hpp"
+
 
 Ecb_Model::Ecb_Model(const std::string src_path, crypter::Coder coder, Jammer *jammer): OperatingModel(src_path, coder, jammer)
 {
@@ -13,7 +15,6 @@ Ecb_Model::~Ecb_Model()
 
 }
 
-#include <iostream>
 void Ecb_Model::encode_file(const std::string dst_path)
 {
   load_stream(dst_path);
@@ -29,7 +30,6 @@ void Ecb_Model::encode_file(const std::string dst_path)
   write(buffer);
 }
 
-#include <iostream>
 void Ecb_Model::decode_file(const std::string dst_path)
 {
   load_stream(dst_path);

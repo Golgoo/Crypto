@@ -1,5 +1,6 @@
 #include "OperatingModel/cfb_model.hpp"
 #include "Bourrage/stub_jam.hpp"
+#include "Util/util.hpp"
 
 Cfb_Model::Cfb_Model(const std::string src_path, crypter::Coder coder, Jammer *jammer): OperatingModel(src_path, coder, jammer)
 {
@@ -11,7 +12,6 @@ Cfb_Model::~Cfb_Model()
 
 }
 
-#include <iostream>
 void Cfb_Model::encode_file(const std::string dst_path)
 {
   load_stream(dst_path);
@@ -33,7 +33,6 @@ void Cfb_Model::encode_file(const std::string dst_path)
   write(state);
 }
 
-#include <iostream>
 void Cfb_Model::decode_file(const std::string dst_path)
 {
   load_stream(dst_path);

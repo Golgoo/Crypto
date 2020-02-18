@@ -1,17 +1,16 @@
 #include "test/OperatingModel/ECB_test.hpp"
 
-
 void ECB_Test::emptyFileTest()
 {
 
 }
 
-void sixteenBitsTest()
+void ECB_Test::sixteenBitsTest()
 {
 
 }
 
-void standartTest()
+void ECB_Test::standartTest()
 {
 
 }

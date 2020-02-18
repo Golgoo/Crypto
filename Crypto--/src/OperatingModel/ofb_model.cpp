@@ -1,5 +1,6 @@
 #include "OperatingModel/ofb_model.hpp"
 
+#include "Util/util.hpp"
 
 Ofb_Model::Ofb_Model(const std::string src_path, crypter::Coder coder, Jammer *jammer): OperatingModel(src_path, coder, jammer)
 {
@@ -11,7 +12,6 @@ Ofb_Model::~Ofb_Model()
 
 }
 
-#include <iostream>
 void Ofb_Model::encode_file(const std::string dst_path)
 {
   load_stream(dst_path);
@@ -32,7 +32,6 @@ void Ofb_Model::encode_file(const std::string dst_path)
   write(buffer);
 }
 
-#include <iostream>
 void Ofb_Model::decode_file(const std::string dst_path)
 {
   load_stream(dst_path) ;

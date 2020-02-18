@@ -15,9 +15,6 @@ class ECB_Test : public CppUnit::TestCase
       CPPUNIT_TEST( standartTest );
     CPPUNIT_TEST_SUITE_END();
 
-  private:
-    Ecb_Model _o_model;
-
   public :
     void emptyFileTest();
     void sixteenBitsTest();

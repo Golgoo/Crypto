@@ -11,8 +11,9 @@
 
 int main(int argc, char*argv[])
 {
-  crypter::Encoder *rsa_encoder = new rsa::RSA();
-  crypter::Decoder *rsa_decoder = new rsa::RSA();
+  rsa::RSA_Key _key ;
+  crypter::Encoder *rsa_encoder = new rsa::RSA(_key);
+  crypter::Decoder *rsa_decoder = new rsa::RSA(_key);
 
   crypter::Coder coder(rsa_encoder, rsa_decoder);
   std::cout << "Programme 1" << std::endl;
