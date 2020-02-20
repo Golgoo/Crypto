@@ -6,7 +6,7 @@
 
 PKCS_1::PKCS_1(): Jammer()
 {
-
+  srand(time(NULL));
 }
 PKCS_1::~PKCS_1()
 {

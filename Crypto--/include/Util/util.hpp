@@ -69,6 +69,11 @@ namespace operation
   uchar gmul(uchar a, uchar b);
 };
 
+namespace hash
+{
+  std::vector<uchar> _SHA1(std::vector<uchar>& v);
+};
+
 namespace out
 {
   void display_block(const std::vector<uchar>& block);

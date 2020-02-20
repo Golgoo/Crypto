@@ -44,6 +44,17 @@ uchar operation::gmul(uchar a, uchar b)
   return p & 0xFF;
 }
 
+#include <openssl/sha.h>
+std::vector<uchar> hash::_SHA1(std::vector<uchar>& v)
+{
+  uchar* casted = &v[0];
+  uchar resume_sha1[SHA_DIGEST_LENGTH];
+  SHA1(casted, v.size(), resume_sha1);
+
+  std::vector<uchar> hashed(resume_sha1, resume_sha1 + SHA_DIGEST_LENGTH);
+  return hashed;
+}
+
 #include <iostream>
 #include <iomanip>
 void out::display_block(const std::vector<uchar> &block)

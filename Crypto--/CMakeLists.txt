@@ -16,6 +16,7 @@ target_compile_features(cryptom PUBLIC cxx_std_17)
 target_link_libraries(
   cryptom
   gmp
+  crypto
 )
 
 #Si vous ne possédez pas CPPUNIT, cette option doit être à OFF
@@ -62,6 +63,14 @@ if(BUILD_CPPUNIT_TEST)
   )
 endif()
 
+add_executable(main_for_no_cppunit___ test/tmpMain.cpp)
+target_compile_features(main_for_no_cppunit___ PUBLIC cxx_std_17)
+
+target_link_libraries(
+  main_for_no_cppunit___
+  cryptom
+
+)
 
 add_executable(crypter_hello test/Crypter/hello_world.cpp)
 target_compile_features(crypter_hello PUBLIC cxx_std_17)
