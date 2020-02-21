@@ -32,7 +32,6 @@ std::vector<uchar> OAEP::MGF(std::vector<uchar>& seed, size_t final_length)
     concat[23] = index;
     tmp = hash::_SHA1(concat);
     v.insert(v.end(), tmp.begin(), tmp.end());
-    std::cout << "Vector size : " << v.size() << std::endl;
     index ++ ;
   }
   v.resize(final_length);
@@ -44,7 +43,7 @@ void OAEP::jam(std::vector<uchar> &vector, size_t block_size)
 
   assert(block_size == 128 && vector.size() <= 86);
   vector.insert(vector.begin(), 0x01);
-  int ps_length = 128 - ( vector.size() + 1 + 20);
+  int ps_length = 107 - ( vector.size() + 1 + 20);
   std::vector<uchar> ps(ps_length) ;
   vector.insert(vector.begin(), ps.begin(), ps.end());
   vector.insert(vector.begin(), lHash.begin(), lHash.end());
@@ -58,9 +57,25 @@ void OAEP::jam(std::vector<uchar> &vector, size_t block_size)
   vector.insert(vector.begin(), 0x00);
 }
 
+#include <algorithm>
 void OAEP::unjam(std::vector<uchar> &vector)
 {
   assert(vector.size() == 128 && vector.at(0) == 0x00);
 
   vector.erase(vector.begin());
+
+  std::vector<uchar> seed(vector.begin(), vector.begin() + 20);
+  vector.erase(vector.begin(), vector.begin() + 20);
+
+  std::vector<uchar> transformed = MGF(vector, 20);
+  operation::XOR(seed, transformed);
+  transformed = MGF(seed, 107);
+  operation::XOR(vector, transformed);
+  vector.erase(vector.begin(), vector.begin()+20);
+  std::reverse(vector.begin(), vector.end());
+  while(vector.back()!=0x01){
+    vector.pop_back();
+  }
+  vector.pop_back();
+  std::reverse(vector.begin(), vector.end());
 }

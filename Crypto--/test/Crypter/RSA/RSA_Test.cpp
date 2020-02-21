@@ -52,7 +52,6 @@ void RSA_Test::default_block_test()
     rsa::clear_rsa_key(key);
   }
 
-
   mpz_clears(code, code_chiffre, code_dechiffre, (void*)NULL);
 }
 

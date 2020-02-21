@@ -12,6 +12,8 @@ link_directories("~/Documents/GMP/lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY lib/)
 file(GLOB_RECURSE SOURCES "src/*")
 add_library(cryptom SHARED ${SOURCES})
+
+
 target_compile_features(cryptom PUBLIC cxx_std_17)
 target_link_libraries(
   cryptom
