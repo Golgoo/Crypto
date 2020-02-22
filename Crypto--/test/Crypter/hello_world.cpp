@@ -1,10 +1,12 @@
 #include <iostream>
 #include "Crypter/RSA/rsa.hpp"
 #include "Crypter/AES/aes.hpp"
-#include "OperatingModel/ecb_model.hpp"
+#include "Cipher/ecb_model.hpp"
 #include "Crypter/coder.hpp"
-#include "Bourrage/Jammer.hpp"
-#include "Bourrage/PKCS_5.hpp"
+#include "Padder/Jammer.hpp"
+#include "Padder/PKCS_5.hpp"
+
+#include <fstream>
 
 int main(int argc, char*argv[])
 {
@@ -15,16 +17,26 @@ int main(int argc, char*argv[])
 
   std::cout << "Programme 1" << std::endl;
   {
-    Ecb_Model op_m (argv[1], coder);
-    op_m.encode_file("tmp.txt");
+    Ecb_Model op_m (coder);
+    std::ifstream in_s(argv[1]);
+    std::ofstream out_s("tmp.txt");
+    op_m.set_stream(&in_s, &out_s);
+    op_m.encode_file();
+    in_s.close();
+    out_s.close();
     delete rsa_encoder ;
   }
 
 
   //std::cout << "Programme 2" << std::endl;
   {
-    Ecb_Model op_m_d("tmp.txt", coder);
-    op_m_d.decode_file(argv[2]);
+    Ecb_Model op_m_d(coder);
+    std::ofstream out_s(argv[1]);
+    std::ifstream in_s("tmp.txt");
+    op_m_d.set_stream(&in_s, &out_s);
+    op_m_d.decode_file();
+    in_s.close();
+    out_s.close();
     delete rsa_decoder;
   }
 

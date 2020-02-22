@@ -34,9 +34,9 @@ void AES_Encoder_Test::TP_Test()
   CPPUNIT_ASSERT(expected == block);
 }
 
-#include "OperatingModel/cbc_model.hpp"
-#include "Bourrage/PKCS_5.hpp"
-#include "Bourrage/PKCS_5.hpp"
+#include "Cipher/cbc_model.hpp"
+#include "Padder/PKCS_5.hpp"
+#include "Padder/PKCS_5.hpp"
 #include "Crypter/AES/aes.hpp"
 #include "Crypter/coder.hpp"
 
@@ -53,12 +53,14 @@ void AES_Encoder_Test::Butokuden()
   crypter::Coder coder(encoder, decoder);
 
   Jammer * jammer = new PKCS_5 ;
-  std::string src_path = "butokuden.jpg";
-  Cbc_Model cipher(src_path, coder, jammer);
+  std::ifstream src_stream("butokuden.jpg");
+  std::ofstream dst_stream("cbc-secret.jpg");
+  Cbc_Model cipher(coder, jammer);
+  cipher.set_stream(&src_stream, &dst_stream);
+  cipher.encode_file();
 
-  std::string dst_path = "cbc-secret.jpg";
-  cipher.encode_file(dst_path);
-
+  src_stream.close();
+  dst_stream.close();
   delete encoder;
   delete decoder;
   delete jammer;

@@ -22,11 +22,11 @@ target_link_libraries(
 )
 
 #Si vous ne possédez pas CPPUNIT, cette option doit être à OFF
-option(BUILD_CPPUNIT_TEST "Construire les tests CppUnits" OFF)
+option(BUILD_CPPUNIT_TEST "Construire les tests CppUnits" ON)
 
 
 if(BUILD_CPPUNIT_TEST)
-  file(GLOB_RECURSE JAM_TEST_SRC "test/BourrageTest/*")
+  file(GLOB_RECURSE JAM_TEST_SRC "test/Padder/*")
 
   add_executable(jam_test ${JAM_TEST_SRC})
   target_compile_features(jam_test PUBLIC cxx_std_17)
@@ -36,7 +36,7 @@ if(BUILD_CPPUNIT_TEST)
     cppunit
   )
 
-  file(GLOB_RECURSE OP_MODEL_SRC "test/OperatingModel/*")
+  file(GLOB_RECURSE OP_MODEL_SRC "test/Cipher/*")
 
   add_executable(op_model_test ${OP_MODEL_SRC})
   target_compile_features(op_model_test PUBLIC cxx_std_17)

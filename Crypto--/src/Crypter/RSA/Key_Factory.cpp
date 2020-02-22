@@ -63,22 +63,29 @@ bool Key_Factory::est_probablement_premier(mpz_t n, int precision)
 int Key_Factory::trouve_nombre_premier(gmp_randstate_t alea, mpz_t& x, int nb_octets, int precision)
 {
   int i = 0 ;
+  mpz_t pow ;
+  mpz_init(pow);
+  mpz_ui_pow_ui (pow, 2, nb_octets-1);
   do{
-    mpz_rrandomb(x, alea, nb_octets);
+    mpz_urandomb(x, alea, nb_octets);
 
     if(mpz_odd_p(x)==0){
       mpz_add_ui(x, x, 1);
     }
+    if(mpz_cmp(x, pow) < 0){
+      mpz_add(x, x, pow);
+    }
     i ++ ;
   }while(! est_probablement_premier(x, precision));
+  mpz_clear(pow);
   return i ;
 }
 
-RSA_Key Key_Factory::createWithFixedE(std::string e, int precision)
+RSA_Key Key_Factory::createRandomKey(int precision, std::string e)
 {
   RSA_Key rsa_key;
   mpz_inits(rsa_key.d, rsa_key.e, rsa_key.n, (void*)NULL);
-  mpz_set_str(rsa_key.e, "65537", 10);
+  mpz_set_str(rsa_key.e, e.c_str(), 10);
 
   mpz_t p, q ;
   mpz_t l ;
@@ -88,7 +95,9 @@ RSA_Key Key_Factory::createWithFixedE(std::string e, int precision)
   mpz_t tmp ; mpz_init(tmp);
   do{
     trouve_nombre_premier(_alea, p, 1024, precision);
-    trouve_nombre_premier(_alea, q, 1024, precision);
+    do{
+      trouve_nombre_premier(_alea, q, 1024, precision);
+    }while(mpz_cmp(p,q)==0);
     mpz_mul(rsa_key.n, p, q);
     mpz_sub_ui(p, p, 1);
     mpz_sub_ui(q, q, 1);

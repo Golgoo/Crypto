@@ -65,6 +65,8 @@ namespace aes{
   public:
     void encode(std::vector<uchar>& block) override ;
     void decode(std::vector<uchar>& block) override ;
+    int encode_length() const override;
+    int decode_length() const override;
   };
 
 };

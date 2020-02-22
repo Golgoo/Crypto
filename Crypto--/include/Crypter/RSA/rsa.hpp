@@ -28,11 +28,19 @@ namespace rsa{
   public:
     void encode(std::vector<uchar> &block) override ;
     void decode(std::vector<uchar> &block) override ;
+    int encode_length() const override;
+    int decode_length() const override;
   };
 
 
   struct RSA_Key create_initialize_rsa_key();
   void clear_rsa_key(RSA_Key rsa_key);
+  inline void display_key(RSA_Key rsa_key)
+  {
+    gmp_printf("Clef publique (n) : %Zd\n", rsa_key.n);
+    gmp_printf("Clef publique (e) : %Zd\n", rsa_key.e);
+    gmp_printf("Clef privée (d)   : %Zd\n", rsa_key.d);
+  }
 
 
   class Key_Factory{
@@ -42,8 +50,7 @@ namespace rsa{
   private:
     gmp_randstate_t _alea ;
   public:
-    struct RSA_Key createRandomKey(int precision);
-    struct RSA_Key createWithFixedE(std::string e, int precision);
+    struct RSA_Key createRandomKey(int precision, std::string e = "65537");
     static int createDefaultPrecision();
     static bool est_probablement_premier(mpz_t n, int precision);
     static int trouve_nombre_premier(gmp_randstate_t alea, mpz_t& x, int nb_octets, int precision);

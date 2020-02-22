@@ -35,7 +35,7 @@ void RSA_Test::default_block_test()
   std::cout << "Precision : " << precision << std::endl;
   int nb_fails = 0 ;
   for(int i = 0 ; i < nb_test ;i ++){
-    rsa::RSA_Key key = key_factory.createWithFixedE("65537", precision);
+    rsa::RSA_Key key = key_factory.createRandomKey(precision);
 
     /* Affichage des clefs utilisées à l'aide de la fonction gmp_printf() */
     gmp_printf("Clef publique (n) : %Zd\n", key.n);
@@ -72,7 +72,7 @@ void RSA_Test::encode_test()
 
   int nb_fails = 0 ;
   for(int i = 0 ; i < 1000 ; i ++){
-    rsa::RSA_Key key = key_factory.createWithFixedE("5001923", precision);
+    rsa::RSA_Key key = key_factory.createRandomKey(precision, "5001923");
 
     std::cout << "Code clair :" << std::endl;
     out::display_block(copy);
@@ -91,6 +91,7 @@ void RSA_Test::encode_test()
     }*/
     if(copy != block) {
       nb_fails++;
+      break;
     }
   }
   CPPUNIT_ASSERT_EQUAL(0, nb_fails);

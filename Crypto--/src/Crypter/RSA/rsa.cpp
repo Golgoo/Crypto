@@ -51,32 +51,65 @@ void RSA::convert_mpz_into_vector(std::vector<uchar>& dst_vector, mpz_t& mpz_src
 
 void RSA::encode(std::vector<uchar> &block)
 {
-  std::cout << "Start of Encoding -------------------------"<<std::endl;
+  /*std::cout << "Start of Encoding -------------------------"<<std::endl;
   std::cout << "Input block : " << std::endl;
   out::display_block(block);
+  */
   convert_vector_into_mpz(_mpz_block, block);
-  std::cout << "Input converted into Mpz : " << std::endl;
+  /*std::cout << "Input converted into Mpz : " << std::endl;
   gmp_printf("%ZX\n",_mpz_block);
-
+*/
   mpz_powm(_mpz_block, _mpz_block, _key.e, _key.n);
+/*
   std::cout << "Size of encoder : " << mpz_sizeinbase(_mpz_block, 16) << std::endl;
   std::cout << "Mpz_Encoded : " << std::endl;
   gmp_printf("%ZX\n",_mpz_block);
-
+*/
   convert_mpz_into_vector(block, _mpz_block);
+/*
   std::cout << "Block_encoded" << block.size() << std::endl;
   out::display_block(block);
-
   std::cout << "End of Encoding -------------------------"<<std::endl;
+  */
 }
 
 void RSA::decode(std::vector<uchar> &block)
 {
+  /*
+
+  std::cout << "Start of Decoding -------------------------"<<std::endl;
+  std::cout << "Input block : " << std::endl;
+  out::display_block(block);
+  */
 
   convert_vector_into_mpz(_mpz_block, block);
 
+/*
+  std::cout << "Input converted into Mpz : " << std::endl;
+  gmp_printf("%ZX\n",_mpz_block);
+*/
   mpz_powm(_mpz_block, _mpz_block, _key.d, _key.n);
 
+/*
+  std::cout << "Size of decoded : " << mpz_sizeinbase(_mpz_block, 16) << std::endl;
+  std::cout << "Mpz_decoded : " << std::endl;
+  gmp_printf("%ZX\n",_mpz_block);
+*/
   convert_mpz_into_vector(block, _mpz_block);
-  //out::display_block(block);
+/*
+  std::cout << "Block_decoded" << block.size() << std::endl;
+  out::display_block(block);
+*/
+}
+
+//TODO FAIRE EN FONCTION DE LA CLEF
+int RSA::encode_length() const
+{
+  return 0x10;
+}
+
+//TODO FAIRE EN FONCTION DE LA CLEF
+int RSA::decode_length() const
+{
+  return 0x100;
 }

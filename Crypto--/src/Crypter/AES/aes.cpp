@@ -63,5 +63,14 @@ void AES::encode(std::vector<uchar>& block)
 void AES::decode(std::vector<uchar>& block)
 {
   assert(block.size() == 16);
+}
 
+int AES::encode_length() const
+{
+  return 0X10;
+}
+
+int AES::decode_length() const
+{
+  return 0x10;
 }

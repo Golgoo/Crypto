@@ -1,0 +1,19 @@
+#include "test/Padder/PKCS_5_test.hpp"
+#include "test/Padder/PKCS_1_test.hpp"
+
+#include <cppunit/TextTestRunner.h>
+
+#include <ctime>
+
+/***************************************************/
+
+int main(void)
+{
+  srand(time(NULL));
+  CppUnit::TextTestRunner runner;
+
+  runner.addTest( PKCS_5_Test::suite() );
+  runner.addTest( PKCS_1_Test::suite() );
+
+  runner.run();
+}
