@@ -8,14 +8,14 @@
 typedef unsigned char uchar;
 
 #include "Crypter/coder.hpp"
-#include "Padder/Padder.hpp"
+#include "Padder/CipherPadder.hpp"
 
 #include <istream>
 #include <ostream>
 
 class OperatingModel{
 public:
-  OperatingModel(crypter::Coder coder, Padder* jammer);
+  OperatingModel(crypter::Coder coder, CipherPadder* jammer);
   virtual ~OperatingModel() = 0;
 public:
   virtual void encode_file() = 0 ;
@@ -31,7 +31,7 @@ private:
   std::istream* _input_stream ;
 protected:
   std::vector<uchar> _init_vector;
-  Padder *_jammer = nullptr;
+  CipherPadder *_jammer = nullptr;
   crypter::Coder _coder;
 
   void read(std::vector<uchar> &buffer, int octets);

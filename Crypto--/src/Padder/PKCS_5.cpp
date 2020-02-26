@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-PKCS_5::PKCS_5(): Padder()
+PKCS_5::PKCS_5(): CipherPadder()
 {
 
 }

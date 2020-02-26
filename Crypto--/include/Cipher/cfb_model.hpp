@@ -7,7 +7,7 @@
 class Cfb_Model: public OperatingModel
 {
 public:
-  Cfb_Model(crypter::Coder coder, Padder* jammer = new StubJammer());
+  Cfb_Model(crypter::Coder coder, CipherPadder* jammer = new StubJammer());
   ~Cfb_Model();
 
 public:

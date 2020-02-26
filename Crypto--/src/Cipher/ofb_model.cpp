@@ -2,7 +2,7 @@
 
 #include "Util/util.hpp"
 
-Ofb_Model::Ofb_Model(crypter::Coder coder, Padder *jammer): OperatingModel(coder, jammer)
+Ofb_Model::Ofb_Model(crypter::Coder coder, CipherPadder *jammer): OperatingModel(coder, jammer)
 {
 
 }

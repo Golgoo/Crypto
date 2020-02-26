@@ -7,7 +7,7 @@
 class Ofb_Model: public OperatingModel
 {
 public:
-  Ofb_Model(crypter::Coder coder, Padder* jammer =  new StubJammer());
+  Ofb_Model(crypter::Coder coder, CipherPadder* jammer =  new StubJammer());
   ~Ofb_Model();
 
 public:

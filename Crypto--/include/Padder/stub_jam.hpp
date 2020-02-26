@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Padder/Padder.hpp"
+#include "Padder/CipherPadder.hpp"
 
 typedef unsigned char uchar ;
 
-class StubJammer : public Padder
+class StubJammer : public CipherPadder
 {
 public:
   StubJammer();

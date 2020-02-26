@@ -2,7 +2,7 @@
 
 #include "Util/util.hpp"
 
-Cbc_Model::Cbc_Model(crypter::Coder coder, Padder *jammer): OperatingModel(coder, jammer)
+Cbc_Model::Cbc_Model(crypter::Coder coder, CipherPadder *jammer): OperatingModel(coder, jammer)
 {
 
 }

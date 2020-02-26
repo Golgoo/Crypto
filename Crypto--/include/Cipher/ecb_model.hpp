@@ -9,7 +9,7 @@
 class Ecb_Model: public OperatingModel
 {
 public:
-  Ecb_Model(crypter::Coder coder, Padder* jammer =  new StubJammer());
+  Ecb_Model(crypter::Coder coder, CipherPadder* jammer =  new StubJammer());
   ~Ecb_Model();
 
 public:

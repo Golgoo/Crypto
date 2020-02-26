@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-OperatingModel::OperatingModel(crypter::Coder coder, Padder *jammer) :_jammer(jammer), _init_vector(16), _coder(coder)
+OperatingModel::OperatingModel(crypter::Coder coder, CipherPadder *jammer) :_jammer(jammer), _init_vector(16), _coder(coder)
 {
   _input_stream = &std::cin;
   _output_stream = &std::cout;
