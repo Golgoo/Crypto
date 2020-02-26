@@ -4,7 +4,7 @@
 
 #include <ctime>
 
-PKCS_1::PKCS_1(): Jammer()
+PKCS_1::PKCS_1(): Padder()
 {
   srand(time(NULL));
 }

@@ -2,7 +2,7 @@
 #include "Padder/stub_jam.hpp"
 #include "Util/util.hpp"
 
-Cfb_Model::Cfb_Model(crypter::Coder coder, Jammer *jammer): OperatingModel(coder, jammer)
+Cfb_Model::Cfb_Model(crypter::Coder coder, Padder *jammer): OperatingModel(coder, jammer)
 {
 
 }

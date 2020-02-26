@@ -52,7 +52,7 @@ void AES_Encoder_Test::Butokuden()
   crypter::Decoder * decoder = new aes::AES(key);
   crypter::Coder coder(encoder, decoder);
 
-  Jammer * jammer = new PKCS_5 ;
+  Padder * jammer = new PKCS_5 ;
   std::ifstream src_stream("butokuden.jpg");
   std::ofstream dst_stream("cbc-secret.jpg");
   Cbc_Model cipher(coder, jammer);

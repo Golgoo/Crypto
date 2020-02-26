@@ -1,6 +1,6 @@
 #include "Padder/OAEP.hpp"
 
-OAEP::OAEP()
+OAEP::OAEP(): Padder()
 {
 
 }

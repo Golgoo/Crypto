@@ -3,7 +3,7 @@
 #include "Crypter/AES/aes.hpp"
 #include "Cipher/ecb_model.hpp"
 #include "Crypter/coder.hpp"
-#include "Padder/Jammer.hpp"
+#include "Padder/Padder.hpp"
 #include "Padder/PKCS_5.hpp"
 
 #include <fstream>

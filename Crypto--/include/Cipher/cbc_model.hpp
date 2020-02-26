@@ -8,7 +8,7 @@
 class Cbc_Model: public OperatingModel
 {
 public:
-  Cbc_Model(crypter::Coder coder, Jammer* jammer =  new StubJammer());
+  Cbc_Model(crypter::Coder coder, Padder* jammer =  new StubJammer());
   ~Cbc_Model();
 
 public:

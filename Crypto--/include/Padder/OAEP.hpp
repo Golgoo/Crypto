@@ -1,8 +1,10 @@
-#include "Padder/Jammer.hpp"
+#pragma once
+
+#include "Padder/Padder.hpp"
 
 #include <vector>
 
-class OAEP: public Jammer
+class OAEP: public Padder
 {
 public:
   OAEP();

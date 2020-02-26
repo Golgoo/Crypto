@@ -5,7 +5,7 @@
 #include "Util/util.hpp"
 
 
-Ecb_Model::Ecb_Model(crypter::Coder coder, Jammer *jammer): OperatingModel(coder, jammer)
+Ecb_Model::Ecb_Model(crypter::Coder coder, Padder *jammer): OperatingModel(coder, jammer)
 {
 
 }

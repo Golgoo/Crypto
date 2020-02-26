@@ -1,6 +1,6 @@
 #include "Padder/stub_jam.hpp"
 
-StubJammer::StubJammer(): Jammer()
+StubJammer::StubJammer(): Padder()
 {
 
 }

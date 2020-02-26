@@ -1,11 +1,11 @@
-#include "Padder/Jammer.hpp"
+#include "Padder/Padder.hpp"
 
-Jammer::Jammer()
+Padder::Padder()
 {
 
 }
 
-Jammer::~Jammer()
+Padder::~Padder()
 {
 
 }

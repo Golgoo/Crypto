@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-PKCS_5::PKCS_5(): Jammer()
+PKCS_5::PKCS_5(): Padder()
 {
 
 }
